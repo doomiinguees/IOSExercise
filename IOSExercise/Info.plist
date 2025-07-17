@@ -58,5 +58,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>UIAppFonts</key>
+    <array>
+        <string>StarJediSpecialEdition.ttf</string>
+    </array>
+
 </dict>
 </plist>

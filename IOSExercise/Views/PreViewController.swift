@@ -1,21 +1,36 @@
 import UIKit
 
-class ViewController: UIViewController {
-    
-    // MARK: - Properties
-    var characters: [Character] = []
-    
-    // MARK: - Lifecycle
+
+    class PreViewController : UIViewController {
+    let globalFontName = "StarJediSpecialEdition"
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupBackground()
-        setupUI()
-        fetchCharacters()
+        setupLogo()
+        setCustomFontInSubviews(view)
     }
-    
-    // MARK: - Setup Methods
-    
+
+    func setCustomFontInSubviews(_ view: UIView) {
+      for subview in view.subviews {
+          if let label = subview as? UILabel {
+              label.font = UIFont(name: globalFontName, size: label.font.pointSize)
+          } else if let button = subview as? UIButton {
+              button.titleLabel?.font = UIFont(name: globalFontName, size: button.titleLabel?.font.pointSize ?? 17)
+          } else if let textField = subview as? UITextField {
+              textField.font = UIFont(name: globalFontName, size: textField.font?.pointSize ?? 17)
+          } else if let textView = subview as? UITextView {
+              textView.font = UIFont(name: globalFontName, size: textView.font?.pointSize ?? 17)
+          }
+          setCustomFontInSubviews(subview) // recursivo
+      }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
     private func setupBackground() {
         let background = UIImageView(image: UIImage(named: "space"))
         background.contentMode = .scaleAspectFill
@@ -27,7 +42,20 @@ class ViewController: UIViewController {
             background.topAnchor.constraint(equalTo: view.topAnchor),
             background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             background.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            background.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            background.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+    
+    private func setupLogo() {
+        let logo = UIImageView(image: UIImage(named: "starLogo"))
+        logo.translatesAutoresizingMaskIntoConstraints = false
+        logo.contentMode = .scaleAspectFit
+        view.addSubview(logo)
+ 
+        NSLayoutConstraint.activate([
+            logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logo.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
@@ -82,18 +110,5 @@ class ViewController: UIViewController {
             secondaryButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
-    
-    // MARK: - API Call
-    private func fetchCharacters() {
-        APIService.shared.fetchCharacters { result in
-            switch result {
-            case .success(let characters):
-                self.characters = characters
-                print("✅ \(characters.count) personagens carregados.")
-                // Aqui podes atualizar a UI, ex: tableView.reloadData()
-            case .failure(let error):
-                print("❌ Erro ao carregar personagens: \(error.localizedDescription)")
-            }
-        }
-    }
+
 }

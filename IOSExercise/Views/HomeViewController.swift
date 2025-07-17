@@ -1,86 +1,25 @@
 import UIKit
 
 
-class HomeViewController : UIViewController {
+class HomeViewController : PreViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBackground()
-        setupLogo()
         setupText()
         setupTextAndButtons()
  //       setupButtons()
         
-        charactersButtonTapped()
-        shipsButtonTapped()
-        planetsButtonTapped()
+    //    charactersButtonTapped()
+      //  shipsButtonTapped()
+       //	 planetsButtonTapped()
 
     }
-    
-    private func setupBackground() {
-        let background = UIImageView(image: UIImage(named: "space"))
-        background.contentMode = .scaleAspectFill
-        background.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(background)
-        view.sendSubviewToBack(background)
-        
-        NSLayoutConstraint.activate([
-            background.topAnchor.constraint(equalTo: view.topAnchor),
-            background.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            background.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            background.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
-    
-    private func setupLogo() {
-            let logo = UIImageView(image: UIImage(named: "starLogo"))
-            logo.translatesAutoresizingMaskIntoConstraints = false
-            logo.contentMode = .scaleAspectFit
-            view.addSubview(logo)
-     
-            NSLayoutConstraint.activate([
-                logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-                logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                logo.heightAnchor.constraint(equalToConstant: 60)
-            ])
-        }
-     
-    private func setupText() {
-      /*  let introLabel = UILabel()
-        introLabel.text = """
-        HERE YOU WILL FIND
-        ALL THE INFORMATION
-        YOU NEED  ABOUT
-        YOUR FAVORITE
-        CHARACTERS, THEIR
-        SHIPS AND THEIR
-        PLANETS
-        """
-        introLabel.font = AppFonts.title
-        introLabel.textColor = UIColor(named: "PrimaryColor")
-        introLabel.textAlignment = .center
-        introLabel.numberOfLines = 0
-        introLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(introLabel)
- 
-        let forceLabel = UILabel()
-        forceLabel.text = "MAY THE FORCE\nBE WITH YOU"
-        forceLabel.font = AppFonts.title
-        forceLabel.textColor = UIColor(named: "PrimaryColor")
-        forceLabel.textAlignment = .center
-        forceLabel.numberOfLines = 0
-        forceLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(forceLabel)
- 
-        NSLayoutConstraint.activate([
-            introLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
-            introLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            introLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
- 
-            forceLabel.topAnchor.constraint(equalTo: introLabel.bottomAnchor, constant: 20),
-            forceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-   */ }
+
+    private func setupText() {}
      
     private func setupTextAndButtons() {
         let introLabel = UILabel()
@@ -154,22 +93,20 @@ class HomeViewController : UIViewController {
         ])
     }*/
     @objc private func charactersButtonTapped() {
-        openContentView(for: "CHARACTERS")
+        let vc = CharactersViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     @objc private func shipsButtonTapped() {
-        openContentView(for: "SHIPS")
+        let vc = ShipsViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     @objc private func planetsButtonTapped() {
-        openContentView(for: "PLANETS")
+        let vc = PlanetsViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
-    
-    private func openContentView(for contentType: String) {
-        let contentVC = ContentViewController()
-        contentVC.contentType = contentType
-        navigationController?.pushViewController(contentVC, animated: true)
-    }
+
 
 
     private func createRoundedButton(title: String) -> UIButton {

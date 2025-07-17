@@ -7,16 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C37304132E28511B00A881B7 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37304122E28511B00A881B7 /* ContentViewController.swift */; };
 		C37304192E28597000A881B7 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37304182E28597000A881B7 /* Endpoints.swift */; };
 		C37304222E285BAC00A881B7 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37304212E285BAC00A881B7 /* Character.swift */; };
 		C37304272E285CDA00A881B7 /* CharacterRespense.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37304262E285CDA00A881B7 /* CharacterRespense.swift */; };
 		C373042C2E285D1600A881B7 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C373042B2E285D1600A881B7 /* APIService.swift */; };
+		C3A723B92E2919AE00821486 /* CharactersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A723B82E2919AE00821486 /* CharactersViewController.swift */; };
+		C3A723BE2E2919C900821486 /* ShipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A723BD2E2919C900821486 /* ShipsViewController.swift */; };
+		C3A723C32E2919EF00821486 /* PlanetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A723C22E2919EF00821486 /* PlanetsViewController.swift */; };
+		C3A723CB2E2923DC00821486 /* PreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A723CA2E2923DC00821486 /* PreViewController.swift */; };
+		C3A723E82E293C6500821486 /* StarJediSpecialEdition.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3A723E72E293C6500821486 /* StarJediSpecialEdition.ttf */; };
 		C3BF51252E25CDE700C611FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3BF51242E25CDE700C611FF /* Assets.xcassets */; };
 		C3BF51282E25CDE700C611FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3BF51272E25CDE700C611FF /* Preview Assets.xcassets */; };
 		C3BF51362E25CDE800C611FF /* IOSExerciseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF51352E25CDE800C611FF /* IOSExerciseTests.swift */; };
 		C3BF51412E25CDE800C611FF /* IOSExerciseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF51402E25CDE800C611FF /* IOSExerciseUITests.swift */; };
-		C3BF51522E25CF4400C611FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF51512E25CF4400C611FF /* ViewController.swift */; };
 		C3BF515A2E25CF9C00C611FF /* UIButton+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF51562E25CF9C00C611FF /* UIButton+Style.swift */; };
 		C3BF515C2E25CF9C00C611FF /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF51582E25CF9C00C611FF /* AppFonts.swift */; };
 		C3BF51652E25CFDA00C611FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF51642E25CFDA00C611FF /* AppDelegate.swift */; };
@@ -42,11 +45,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C37304122E28511B00A881B7 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		C37304182E28597000A881B7 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		C37304212E285BAC00A881B7 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		C37304262E285CDA00A881B7 /* CharacterRespense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRespense.swift; sourceTree = "<group>"; };
 		C373042B2E285D1600A881B7 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		C3A723B82E2919AE00821486 /* CharactersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewController.swift; sourceTree = "<group>"; };
+		C3A723BD2E2919C900821486 /* ShipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipsViewController.swift; sourceTree = "<group>"; };
+		C3A723C22E2919EF00821486 /* PlanetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsViewController.swift; sourceTree = "<group>"; };
+		C3A723CA2E2923DC00821486 /* PreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreViewController.swift; sourceTree = "<group>"; };
+		C3A723E72E293C6500821486 /* StarJediSpecialEdition.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StarJediSpecialEdition.ttf; sourceTree = "<group>"; };
 		C3BF511B2E25CDDD00C611FF /* IOSExercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSExercise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BF51242E25CDE700C611FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C3BF51272E25CDE700C611FF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -57,7 +64,6 @@
 		C3BF513C2E25CDE800C611FF /* IOSExerciseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IOSExerciseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BF51402E25CDE800C611FF /* IOSExerciseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSExerciseUITests.swift; sourceTree = "<group>"; };
 		C3BF51422E25CDE800C611FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C3BF51512E25CF4400C611FF /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C3BF51562E25CF9C00C611FF /* UIButton+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Style.swift"; sourceTree = "<group>"; };
 		C3BF51582E25CF9C00C611FF /* AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		C3BF51642E25CFDA00C611FF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -175,9 +181,11 @@
 		C3D8E8752E266E8300890761 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C3BF51512E25CF4400C611FF /* ViewController.swift */,
 				C3D8E8912E26722A00890761 /* HomeViewController.swift */,
-				C37304122E28511B00A881B7 /* ContentViewController.swift */,
+				C3A723B82E2919AE00821486 /* CharactersViewController.swift */,
+				C3A723BD2E2919C900821486 /* ShipsViewController.swift */,
+				C3A723C22E2919EF00821486 /* PlanetsViewController.swift */,
+				C3A723CA2E2923DC00821486 /* PreViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -185,6 +193,7 @@
 		C3D8E87C2E266EC900890761 /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				C3A723E72E293C6500821486 /* StarJediSpecialEdition.ttf */,
 				C3BF51242E25CDE700C611FF /* Assets.xcassets */,
 			);
 			path = Ressources;
@@ -316,6 +325,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3A723E82E293C6500821486 /* StarJediSpecialEdition.ttf in Resources */,
 				C3BF51282E25CDE700C611FF /* Preview Assets.xcassets in Resources */,
 				C3BF51252E25CDE700C611FF /* Assets.xcassets in Resources */,
 			);
@@ -343,16 +353,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				C37304272E285CDA00A881B7 /* CharacterRespense.swift in Sources */,
+				C3A723BE2E2919C900821486 /* ShipsViewController.swift in Sources */,
+				C3A723C32E2919EF00821486 /* PlanetsViewController.swift in Sources */,
 				C37304222E285BAC00A881B7 /* Character.swift in Sources */,
 				C3D8E88A2E26707900890761 /* SceneDelegate.swift in Sources */,
 				C3BF515C2E25CF9C00C611FF /* AppFonts.swift in Sources */,
+				C3A723CB2E2923DC00821486 /* PreViewController.swift in Sources */,
 				C373042C2E285D1600A881B7 /* APIService.swift in Sources */,
-				C3BF51522E25CF4400C611FF /* ViewController.swift in Sources */,
 				C3BF515A2E25CF9C00C611FF /* UIButton+Style.swift in Sources */,
 				C3BF51652E25CFDA00C611FF /* AppDelegate.swift in Sources */,
+				C3A723B92E2919AE00821486 /* CharactersViewController.swift in Sources */,
 				C3D8E8922E26722A00890761 /* HomeViewController.swift in Sources */,
 				C37304192E28597000A881B7 /* Endpoints.swift in Sources */,
-				C37304132E28511B00A881B7 /* ContentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

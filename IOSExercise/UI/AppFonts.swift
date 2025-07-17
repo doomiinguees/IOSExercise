@@ -1,10 +1,10 @@
 import UIKit
  
 struct AppFonts {
-    static let title = UIFont.systemFont(ofSize: 22, weight: .heavy)
-    static let button = UIFont.systemFont(ofSize: 18, weight: .bold)
-    static let subtitle = UIFont.systemFont(ofSize: 18)
-    static let body = UIFont.systemFont(ofSize: 16)
-    static let caption = UIFont.systemFont(ofSize: 12)
+    static let title = UIFont(name: "StarJediSpecialEdition", size: 22)
+    static let button = UIFont(name: "StarJediSpecialEdition", size: 18)
+    static let subtitle = UIFont(name: "StarJediSpecialEdition", size: 18)
+    static let body = UIFont(name: "StarJediSpecialEdition", size: 16)
+    static let caption = UIFont(name: "StarJediSpecialEdition", size: 12)
 
 }

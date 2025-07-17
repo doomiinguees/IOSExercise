@@ -14,8 +14,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let fontName = "StarJediSpecialEdition"
+
+        UILabel.appearance().font = UIFont(name: fontName, size: 18)
+        UIButton.appearance().titleLabel?.font = UIFont(name: fontName, size: 18)
+        UITextField.appearance().font = UIFont(name: fontName, size: 18)
+        UITextView.appearance().font = UIFont(name: fontName, size: 18)
         return true
     }
+    
+    func configureGlobalFont() {
+    }
+
 
     // MARK: UISceneSession Lifecycle
 
