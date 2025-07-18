@@ -4,7 +4,7 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
 
     private let tableView = UITableView()
     private let searchBar = UISearchBar()
-    private let characters = ["Luke Skywalker", "Darth Vader", "Leia Organa", "Han Solo", "Yoda"] // Exemplo
+    private var characters: [Character] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +16,17 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
         setupSearchBar()
         setupTableView()
         setupConstraints()
+        
+        APIService.fetchCharacters { [weak self] result in
+           switch result {
+           case .success(let characters):
+               self?.characters = characters
+               self?.tableView.reloadData()
+           case .failure(let error):
+               print("Erro ao buscar personagens: \(error)")
+           }
+        }
+
     }
 
     // MARK: - Back Button
@@ -100,25 +111,49 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
     }
 
     // MARK: - UITableView DataSource
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return characters.count
-    }
+       return characters.count
+   }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
-        cell.textLabel?.text = characters[indexPath.row]
+        let character = characters[indexPath.row]
+        cell.textLabel?.text = character.name
+        cell.textLabel?.font = UIFont(name: "StarJediSpecialEdition", size: 18)
         cell.textLabel?.textColor = UIColor(named: "PrimaryColor")
-        cell.textLabel?.font = UIFont(name: "StarJediSpecialEdition", size: 18) ?? UIFont.systemFont(ofSize: 18)
-        cell.textLabel?.textAlignment = .center   // <- Centraliza o texto
-        cell.textLabel?.numberOfLines = 0         // (opcional) para suportar várias linhas
-
+        cell.textLabel?.textAlignment = .center
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
         
+        let container = UIView()
+        container.translatesAutoresizingMaskIntoConstraints = false
+        cell.contentView.addSubview(container)
+        
+        NSLayoutConstraint.activate([
+            container.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
+            container.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor),
+            container.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor),
+            container.heightAnchor.constraint(equalToConstant: 38)
+        ])
+        
         return cell
     }
+        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let selectedCharacter = characters[indexPath.row]
+
+        // Por agora apenas imprime no console
+        print("Selected character: \(selectedCharacter.name)")
+
+        // FUTURO: Quando tiveres um CharacterDetailViewController, podes fazer isto:
+        // let detailVC = CharacterDetailViewController(characterName: selectedCharacter)
+        // navigationController?.pushViewController(detailVC, animated: true)
+    }
+
     
     // MARK: - Constraints
 
@@ -137,6 +172,5 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
 
 }

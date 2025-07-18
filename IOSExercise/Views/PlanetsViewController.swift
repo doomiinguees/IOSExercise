@@ -4,7 +4,7 @@ class PlanetsViewController: PreViewController, UITableViewDelegate, UITableView
     
     private let tableView = UITableView()
     private let searchBar = UISearchBar()
-    private let characters = ["Luke Skywalker", "Darth Vader", "Leia Organa", "Han Solo", "Yoda"] // Exemplo
+    private var planets: [Planet] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,8 +16,17 @@ class PlanetsViewController: PreViewController, UITableViewDelegate, UITableView
         setupSearchBar()
         setupTableView()
         setupConstraints()
+        
+        APIService.fetchPlanets { [weak self] result in
+           switch result {
+           case .success(let planets):
+               self?.planets = planets
+               self?.tableView.reloadData()
+           case .failure(let error):
+               print("Error searching Planets: \(error)")
+           }
+        }
     }
-    
     
     private func addCustomBackButton() {
         let backButton = UIButton(type: .system)
@@ -98,6 +107,50 @@ class PlanetsViewController: PreViewController, UITableViewDelegate, UITableView
         view.addSubview(tableView)
     }
 
+    // MARK: - UITableView DataSource
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return planets.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        let planet = planets[indexPath.row]
+        cell.textLabel?.text = planet.name
+        cell.textLabel?.textColor = UIColor(named: "PrimaryColor")
+        cell.textLabel?.font = UIFont(name: "StarJediSpecialEdition", size: 18) ?? UIFont.systemFont(ofSize: 18)
+        cell.textLabel?.textAlignment = .center   // <- Centraliza o texto
+        cell.textLabel?.numberOfLines = 0         // (opcional) para suportar várias linhas
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        
+        let container = UIView()
+        container.translatesAutoresizingMaskIntoConstraints = false
+        cell.contentView.addSubview(container)
+        
+        NSLayoutConstraint.activate([
+            container.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
+            container.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor),
+            container.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor),
+            container.heightAnchor.constraint(equalToConstant: 38)
+        ])
+        return cell
+    }
+        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let selectedPlanets = planets[indexPath.row]
+
+        print("Selected planet: \(selectedPlanets.name)")
+
+        // FUTURO: Quando tiveres um CharacterDetailViewController, podes fazer isto:
+        // let detailVC = CharacterDetailViewController(characterName: selectedCharacter)
+        // navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
     // MARK: - Constraints
 
     private func setupConstraints() {
@@ -115,26 +168,4 @@ class PlanetsViewController: PreViewController, UITableViewDelegate, UITableView
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
-    // MARK: - UITableView DataSource
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return characters.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
-        cell.textLabel?.text = characters[indexPath.row]
-        cell.textLabel?.textColor = UIColor(named: "PrimaryColor")
-        cell.textLabel?.font = UIFont(name: "StarJediSpecialEdition", size: 18) ?? UIFont.systemFont(ofSize: 18)
-        cell.textLabel?.textAlignment = .center   // <- Centraliza o texto
-        cell.textLabel?.numberOfLines = 0         // (opcional) para suportar várias linhas
-
-        cell.backgroundColor = .clear
-        cell.selectionStyle = .none
-        
-        return cell
-    }
-
 }
