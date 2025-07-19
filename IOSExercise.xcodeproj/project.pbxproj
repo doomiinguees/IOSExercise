@@ -139,7 +139,6 @@
 			children = (
 				C3A723F82E2AB77300821486 /* Models */,
 				C37304172E28594B00A881B7 /* Network */,
-				C3D8E8872E266FF500890761 /* ViewModels */,
 				C3D8E8802E266F3300890761 /* UI */,
 				C3D8E87C2E266EC900890761 /* Ressources */,
 				C3D8E8752E266E8300890761 /* Views */,
@@ -205,13 +204,6 @@
 				C3BF51562E25CF9C00C611FF /* UIButton+Style.swift */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		C3D8E8872E266FF500890761 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
