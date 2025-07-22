@@ -21,7 +21,8 @@ class PlanetsViewController: PreViewController, UITableViewDelegate, UITableView
         
         setupTableView()
         setupConstraints()
-        /*APIService.fetchPlanets { [weak self] result in
+        
+        APIService.fetchPlanets { [weak self] result in
             switch result {
             case .success(let planets):
                 self?.planets = planets
@@ -32,7 +33,7 @@ class PlanetsViewController: PreViewController, UITableViewDelegate, UITableView
             case .failure(let error):
                 print("Error searching planets: \(error)")
             }
-        }*/
+        }
     }
 
     // MARK: - Table View
@@ -88,9 +89,8 @@ class PlanetsViewController: PreViewController, UITableViewDelegate, UITableView
         // Por agora apenas imprime no console
         print("Selected planet: \(selectedPlanet.name)")
 
-        // FUTURO: Quando tiveres um PlanetDetailViewController, podes fazer isto:
-        // let detailVC = PlanetDetailViewController(planetName: selectedPlanet)
-        // navigationController?.pushViewController(detailVC, animated: true)
+        let detailVC = PlanetDetailsViewController(planet: selectedPlanet)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 
     
@@ -98,6 +98,9 @@ class PlanetsViewController: PreViewController, UITableViewDelegate, UITableView
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
             searchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),

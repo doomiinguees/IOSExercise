@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C365D02D2E2F0390007C7BB9 /* CharacterFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365D02C2E2F038F007C7BB9 /* CharacterFull.swift */; };
 		C365D0322E2F06FD007C7BB9 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365D0312E2F06FD007C7BB9 /* Species.swift */; };
+		C365D0372E2F1774007C7BB9 /* PlanetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365D0362E2F1774007C7BB9 /* PlanetDetailsViewController.swift */; };
+		C365D03C2E2F2372007C7BB9 /* ShipDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365D03B2E2F2372007C7BB9 /* ShipDetailsViewController.swift */; };
 		C37304222E285BAC00A881B7 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37304212E285BAC00A881B7 /* Character.swift */; };
 		C373042C2E285D1600A881B7 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C373042B2E285D1600A881B7 /* APIService.swift */; };
 		C3A723B92E2919AE00821486 /* CharactersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A723B82E2919AE00821486 /* CharactersViewController.swift */; };
@@ -51,6 +53,8 @@
 /* Begin PBXFileReference section */
 		C365D02C2E2F038F007C7BB9 /* CharacterFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFull.swift; sourceTree = "<group>"; };
 		C365D0312E2F06FD007C7BB9 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
+		C365D0362E2F1774007C7BB9 /* PlanetDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDetailsViewController.swift; sourceTree = "<group>"; };
+		C365D03B2E2F2372007C7BB9 /* ShipDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipDetailsViewController.swift; sourceTree = "<group>"; };
 		C37304212E285BAC00A881B7 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		C373042B2E285D1600A881B7 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C3A723B82E2919AE00821486 /* CharactersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +200,8 @@
 				C3A723C22E2919EF00821486 /* PlanetsViewController.swift */,
 				C3A723CA2E2923DC00821486 /* PreViewController.swift */,
 				C3B88AFE2E2E3DCF00F6CC72 /* CharacterDetailsViewController.swift */,
+				C365D0362E2F1774007C7BB9 /* PlanetDetailsViewController.swift */,
+				C365D03B2E2F2372007C7BB9 /* ShipDetailsViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -359,8 +365,10 @@
 				C3A723CB2E2923DC00821486 /* PreViewController.swift in Sources */,
 				C373042C2E285D1600A881B7 /* APIService.swift in Sources */,
 				C3BB51A02E2E8E7700D52B7B /* Film.swift in Sources */,
+				C365D03C2E2F2372007C7BB9 /* ShipDetailsViewController.swift in Sources */,
 				C3BF515A2E25CF9C00C611FF /* UIButton+Style.swift in Sources */,
 				C3BF51652E25CFDA00C611FF /* AppDelegate.swift in Sources */,
+				C365D0372E2F1774007C7BB9 /* PlanetDetailsViewController.swift in Sources */,
 				C3A723B92E2919AE00821486 /* CharactersViewController.swift in Sources */,
 				C365D02D2E2F0390007C7BB9 /* CharacterFull.swift in Sources */,
 				C3D8E8922E26722A00890761 /* HomeViewController.swift in Sources */,

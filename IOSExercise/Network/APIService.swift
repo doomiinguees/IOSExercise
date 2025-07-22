@@ -10,6 +10,16 @@ struct PlanetResponse: Decodable {
 
 struct StarshipResponse: Decodable {
     let results: [Starship]
+    
+struct Planet: Codable {
+    let name: String
+    // outros campos se quiser
+}
+
+struct Species: Codable {
+    let name: String
+    // outros campos se quiser
+}
 }
 
 class APIService {
@@ -174,5 +184,42 @@ class APIService {
             completion(films)
         }
     }
+    static func fetchPlanetURL(from urlString: String, completion: @escaping (Result<Planet, Error>) -> Void) {
+            guard let url = URL(string: urlString) else {
+                completion(.failure(NSError(domain: "Invalid URL", code: -1)))
+                return
+            }
+            URLSession.shared.dataTask(with: url) { data, _, error in
+                if let data = data {
+                    do {
+                        let planet = try JSONDecoder().decode(Planet.self, from: data)
+                        completion(.success(planet))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                } else if let error = error {
+                    completion(.failure(error))
+                }
+            }.resume()
+        }
+        
+        static func fetchSpecies(from urlString: String, completion: @escaping (Result<Species, Error>) -> Void) {
+            guard let url = URL(string: urlString) else {
+                completion(.failure(NSError(domain: "Invalid URL", code: -1)))
+                return
+            }
+            URLSession.shared.dataTask(with: url) { data, _, error in
+                if let data = data {
+                    do {
+                        let species = try JSONDecoder().decode(Species.self, from: data)
+                        completion(.success(species))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                } else if let error = error {
+                    completion(.failure(error))
+                }
+            }.resume()
+        }
 
 }

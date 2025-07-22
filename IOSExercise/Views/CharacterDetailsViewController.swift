@@ -35,7 +35,38 @@ class CharacterDetailsViewController: PreViewController {
         setupConstraints()
         
         fetchHomeworldAndSetupInfo()
-      //  fetchSpeciesAndSetupInfo()
+        fetchSpeciesAndSetupInfo()
+    }
+    
+    private func fetchHomeworldAndSetupInfo() {
+        APIService.fetchPlanet(from: character.homeworld) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let planet):
+                self.homeworldName = planet.name
+            case .failure:
+                self.homeworldName = "Unknown"
+            }
+            self.updateHomeworldLabel()
+        }
+    }
+
+    private func fetchSpeciesAndSetupInfo() {
+        guard let speciesURL = character.species.first else {
+            speciesName = "Unknown"
+            updateSpeciesLabel()
+            return
+        }
+        APIService.fetchSpecies(from: speciesURL) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let species):
+                self.speciesName = species.name
+            case .failure:
+                self.speciesName = "Unknown"
+            }
+            self.updateSpeciesLabel()
+        }
     }
     
     private func setupCharacterInfo() {
@@ -181,40 +212,6 @@ class CharacterDetailsViewController: PreViewController {
             self.speciesValueLabel?.text = self.speciesName
         }
     }
-    
-    private func fetchHomeworldAndSetupInfo() {
-      /*  APIService.fetchPlanet(from: character.homeworldURL) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let planet):
-                self.homeworldName = planet.name
-            case .failure:
-                self.homeworldName = "Unknown"
-            }
-            self.updateHomeworldLabel()
-        }*/
-    }
-    
-  /*  private func fetchSpeciesAndSetupInfo() {
-        guard let speciesURL = character.speciesURLs.first else {
-            speciesName = "Unknown"
-            updateSpeciesLabel()
-            return
-        }
-        
-        APIService.fetchSpecies(from: speciesURL) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let species):
-                self.speciesName = species.name
-            case .failure:
-                self.speciesName = "Unknown"
-            }
-            self.updateSpeciesLabel()
-        }
-    }*/
     
     private func pronounsFromGender(_ gender: String) -> String {
         switch gender.lowercased() {

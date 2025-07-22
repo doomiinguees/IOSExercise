@@ -22,7 +22,7 @@ class ShipsViewController: PreViewController, UITableViewDelegate, UITableViewDa
         setupTableView()
         setupConstraints()
     
-        /*APIService.fetchStarships { [weak self] result in
+        APIService.fetchStarships { [weak self] result in
             switch result {
             case .success(let starships):
                 self?.starships = starships
@@ -33,7 +33,7 @@ class ShipsViewController: PreViewController, UITableViewDelegate, UITableViewDa
             case .failure(let error):
                 print("Error searching starships: \(error)")
             }
-        }*/
+        }
     }
 
     // MARK: - Table View
@@ -88,16 +88,18 @@ class ShipsViewController: PreViewController, UITableViewDelegate, UITableViewDa
 
         // Por agora apenas imprime no console
         print("Selected starship: \(selectedStarship.name)")
-
-        // FUTURO: Quando tiveres um StarshipDetailViewController, podes fazer isto:
-        // let detailVC = StarshipDetailViewController(starshipName: selectedStarship)
-        // navigationController?.pushViewController(detailVC, animated: true)
+        
+        let detailVC = ShipDetailsViewController(ship: selectedStarship)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
     // MARK: - Constraints
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
             searchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
@@ -107,7 +109,12 @@ class ShipsViewController: PreViewController, UITableViewDelegate, UITableViewDa
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-                    ])
+            emptyStateImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyStateImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            emptyStateImageView.widthAnchor.constraint(equalToConstant: 200),
+            emptyStateImageView.heightAnchor.constraint(equalToConstant: 200)
+            
+        ])
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
