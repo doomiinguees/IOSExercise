@@ -42,11 +42,12 @@ class PlanetDetailsViewController: PreViewController {
 
     private func setupPlanetInfo() {
         titleLabel.text = planet.name.lowercased()
+        
         titleLabel.font = AppFonts.home
 
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 24
+        stackView.spacing = 12
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
@@ -54,16 +55,17 @@ class PlanetDetailsViewController: PreViewController {
         func infoRow(key: String, value: String) -> UIStackView {
             let row = UIStackView()
             row.axis = .horizontal
-            row.spacing = 8
+            row.spacing = 12
             row.alignment = .top
             row.distribution = .fill
 
             let keyLabel = UILabel()
-            keyLabel.text = key.uppercased()
+            keyLabel.text = key.lowercased()
             keyLabel.font = AppFonts.body
             keyLabel.textColor = UIColor(named: "PrimaryColor")
             keyLabel.textAlignment = .right
-            keyLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            keyLabel.lineBreakMode = .byWordWrapping
+            keyLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
             
             keyLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
             keyLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -107,13 +109,12 @@ class PlanetDetailsViewController: PreViewController {
     }
     
     private func setupConstraints() {
-        guard let backButton = view.subviews.first(where: { $0 is UIButton }) else {
-            return
-        }
         NSLayoutConstraint.activate([
-            titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 40)
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 24),
+            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -24),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
+
 }

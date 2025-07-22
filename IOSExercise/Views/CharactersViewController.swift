@@ -61,12 +61,13 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let character = filteredCharacters[indexPath.row]
+        cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = character.name.lowercased()
         cell.textLabel?.font = UIFont(name: "StarJediSpecialEdition", size: 18)
         cell.textLabel?.textColor = UIColor(named: "PrimaryColor")
         cell.textLabel?.textAlignment = .center
-        cell.backgroundColor = .clear
-        cell.selectionStyle = .none
+        cell.textLabel?.lineBreakMode = .byWordWrapping
+
         
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false

@@ -59,10 +59,12 @@ class ShipsViewController: PreViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let starship = filteredStarships[indexPath.row]
-        cell.textLabel?.text = starship.name
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.text = starship.name.lowercased()
         cell.textLabel?.font = UIFont(name: "StarJediSpecialEdition", size: 18)
         cell.textLabel?.textColor = UIColor(named: "PrimaryColor")
         cell.textLabel?.textAlignment = .center
+        cell.textLabel?.lineBreakMode = .byWordWrapping
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
         

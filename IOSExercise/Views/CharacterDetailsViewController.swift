@@ -222,13 +222,11 @@ class CharacterDetailsViewController: PreViewController {
     }
     
     private func setupConstraints() {
-        guard let backButton = view.subviews.first(where: { $0 is UIButton }) else {
-            return
-        }
         NSLayoutConstraint.activate([
-            titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 40)
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 24),
+            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -24),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 }
