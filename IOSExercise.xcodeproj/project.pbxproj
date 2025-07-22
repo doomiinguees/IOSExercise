@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C365D02D2E2F0390007C7BB9 /* CharacterFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365D02C2E2F038F007C7BB9 /* CharacterFull.swift */; };
+		C365D0322E2F06FD007C7BB9 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365D0312E2F06FD007C7BB9 /* Species.swift */; };
 		C37304222E285BAC00A881B7 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37304212E285BAC00A881B7 /* Character.swift */; };
 		C373042C2E285D1600A881B7 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C373042B2E285D1600A881B7 /* APIService.swift */; };
 		C3A723B92E2919AE00821486 /* CharactersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A723B82E2919AE00821486 /* CharactersViewController.swift */; };
@@ -16,6 +18,8 @@
 		C3A723E82E293C6500821486 /* StarJediSpecialEdition.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3A723E72E293C6500821486 /* StarJediSpecialEdition.ttf */; };
 		C3A7241B2E2ACCEA00821486 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A7241A2E2ACCEA00821486 /* Planet.swift */; };
 		C3A724202E2ACD1F00821486 /* Starship.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A7241F2E2ACD1F00821486 /* Starship.swift */; };
+		C3B88AFF2E2E3DCF00F6CC72 /* CharacterDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B88AFE2E2E3DCF00F6CC72 /* CharacterDetailsViewController.swift */; };
+		C3BB51A02E2E8E7700D52B7B /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BB519F2E2E8E7700D52B7B /* Film.swift */; };
 		C3BF51252E25CDE700C611FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3BF51242E25CDE700C611FF /* Assets.xcassets */; };
 		C3BF51282E25CDE700C611FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3BF51272E25CDE700C611FF /* Preview Assets.xcassets */; };
 		C3BF51362E25CDE800C611FF /* IOSExerciseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BF51352E25CDE800C611FF /* IOSExerciseTests.swift */; };
@@ -45,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C365D02C2E2F038F007C7BB9 /* CharacterFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFull.swift; sourceTree = "<group>"; };
+		C365D0312E2F06FD007C7BB9 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		C37304212E285BAC00A881B7 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		C373042B2E285D1600A881B7 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		C3A723B82E2919AE00821486 /* CharactersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +60,8 @@
 		C3A723E72E293C6500821486 /* StarJediSpecialEdition.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StarJediSpecialEdition.ttf; sourceTree = "<group>"; };
 		C3A7241A2E2ACCEA00821486 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		C3A7241F2E2ACD1F00821486 /* Starship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starship.swift; sourceTree = "<group>"; };
+		C3B88AFE2E2E3DCF00F6CC72 /* CharacterDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailsViewController.swift; sourceTree = "<group>"; };
+		C3BB519F2E2E8E7700D52B7B /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		C3BF511B2E25CDDD00C611FF /* IOSExercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSExercise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BF51242E25CDE700C611FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C3BF51272E25CDE700C611FF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -110,6 +118,9 @@
 				C37304212E285BAC00A881B7 /* Character.swift */,
 				C3A7241A2E2ACCEA00821486 /* Planet.swift */,
 				C3A7241F2E2ACD1F00821486 /* Starship.swift */,
+				C3BB519F2E2E8E7700D52B7B /* Film.swift */,
+				C365D02C2E2F038F007C7BB9 /* CharacterFull.swift */,
+				C365D0312E2F06FD007C7BB9 /* Species.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -184,6 +195,7 @@
 				C3A723BD2E2919C900821486 /* ShipsViewController.swift */,
 				C3A723C22E2919EF00821486 /* PlanetsViewController.swift */,
 				C3A723CA2E2923DC00821486 /* PreViewController.swift */,
+				C3B88AFE2E2E3DCF00F6CC72 /* CharacterDetailsViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -343,12 +355,16 @@
 				C3D8E88A2E26707900890761 /* SceneDelegate.swift in Sources */,
 				C3A724202E2ACD1F00821486 /* Starship.swift in Sources */,
 				C3BF515C2E25CF9C00C611FF /* AppFonts.swift in Sources */,
+				C3B88AFF2E2E3DCF00F6CC72 /* CharacterDetailsViewController.swift in Sources */,
 				C3A723CB2E2923DC00821486 /* PreViewController.swift in Sources */,
 				C373042C2E285D1600A881B7 /* APIService.swift in Sources */,
+				C3BB51A02E2E8E7700D52B7B /* Film.swift in Sources */,
 				C3BF515A2E25CF9C00C611FF /* UIButton+Style.swift in Sources */,
 				C3BF51652E25CFDA00C611FF /* AppDelegate.swift in Sources */,
 				C3A723B92E2919AE00821486 /* CharactersViewController.swift in Sources */,
+				C365D02D2E2F0390007C7BB9 /* CharacterFull.swift in Sources */,
 				C3D8E8922E26722A00890761 /* HomeViewController.swift in Sources */,
+				C365D0322E2F06FD007C7BB9 /* Species.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

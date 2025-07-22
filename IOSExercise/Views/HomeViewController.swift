@@ -4,14 +4,16 @@ import UIKit
 class HomeViewController : PreViewController {
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.setupBackground()
+        super.setupLogo()
+
         setupText()
         setupTextAndButtons()
- //       setupButtons()
+//        setupButtons()
         
     //    charactersButtonTapped()
       //  shipsButtonTapped()
-       //	 planetsButtonTapped()
+       //     planetsButtonTapped()
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -20,17 +22,17 @@ class HomeViewController : PreViewController {
     }
 
     private func setupText() {}
-     
+      
     private func setupTextAndButtons() {
         let introLabel = UILabel()
         introLabel.text = """
-        HERE YOU WILL FIND
-        ALL THE INFORMATION
-        YOU NEED  ABOUT
-        YOUR FAVORITE
-        CHARACTERS, THEIR
-        SHIPS AND THEIR
-        PLANETS
+        here you will find
+        all the information
+        you need about
+        your favorite
+        characters, their
+        ships and their
+        planets
         """
         introLabel.font = AppFonts.title
         introLabel.textColor = UIColor(named: "PrimaryColor")
@@ -38,19 +40,19 @@ class HomeViewController : PreViewController {
         introLabel.numberOfLines = 0
 
         let forceLabel = UILabel()
-        forceLabel.text = "MAY THE FORCE\nBE WITH YOU"
+        forceLabel.text = "may the force\nbe with you"
         forceLabel.font = AppFonts.title
         forceLabel.textColor = UIColor(named: "PrimaryColor")
         forceLabel.textAlignment = .center
         forceLabel.numberOfLines = 0
 
-        let charactersButton = createRoundedButton(title: "CHARACTERS")
+        let charactersButton = createRoundedButton(title: "characters")
         charactersButton.addTarget(self, action: #selector(charactersButtonTapped), for: .touchUpInside)
 
-        let shipsButton = createRoundedButton(title: "SHIPS")
+        let shipsButton = createRoundedButton(title: "ships")
         shipsButton.addTarget(self, action: #selector(shipsButtonTapped), for: .touchUpInside)
 
-        let planetsButton = createRoundedButton(title: "PLANETS")
+        let planetsButton = createRoundedButton(title: "planets")
         planetsButton.addTarget(self, action: #selector(planetsButtonTapped), for: .touchUpInside)
 
 
@@ -70,28 +72,6 @@ class HomeViewController : PreViewController {
         ])
     }
 
-    
-    /*private func setupButtons() {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stackView)
- 
-        let charactersButton = createRoundedButton(title: "CHARACTERS")
-        let shipsButton = createRoundedButton(title: "SHIPS")
-        let planetsButton = createRoundedButton(title: "PLANETS")
- 
-        stackView.addArrangedSubview(charactersButton)
-        stackView.addArrangedSubview(shipsButton)
-        stackView.addArrangedSubview(planetsButton)
- 
-        NSLayoutConstraint.activate([
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
-        ])
-    }*/
     @objc private func charactersButtonTapped() {
         let vc = CharactersViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -120,4 +100,3 @@ class HomeViewController : PreViewController {
         return button
     }
 }
-

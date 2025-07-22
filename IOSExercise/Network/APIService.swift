@@ -118,4 +118,61 @@ class APIService {
         }.resume()
     }
     
+    static func fetchPlanet(from url: String, completion: @escaping (Result<Planet, Error>) -> Void) {
+        guard let planetURL = URL(string: url) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 1003)))
+            return
+        }
+
+        URLSession.shared.dataTask(with: planetURL) { data, response, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+                return
+            }
+
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(.failure(NSError(domain: "No data", code: 1004)))
+                }
+                return
+            }
+
+            do {
+                let decoded = try JSONDecoder().decode(Planet.self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(decoded))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }.resume()
+    }
+
+    static func fetchFilms(from urls: [String], completion: @escaping ([Film]) -> Void) {
+        var films: [Film] = []
+        let group = DispatchGroup()
+
+        for urlString in urls {
+            guard let filmURL = URL(string: urlString) else { continue }
+            group.enter()
+
+            URLSession.shared.dataTask(with: filmURL) { data, response, error in
+                defer { group.leave() }
+                if let data = data {
+                    if let decoded = try? JSONDecoder().decode(Film.self, from: data) {
+                        films.append(decoded)
+                    }
+                }
+            }.resume()
+        }
+
+        group.notify(queue: .main) {
+            completion(films)
+        }
+    }
+
 }
