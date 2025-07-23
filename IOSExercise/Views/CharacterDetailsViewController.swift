@@ -4,13 +4,11 @@ class CharacterDetailsViewController: PreViewController {
     
     private let character: Character
     
-    // Labels que vão atualizar dinamicamente
     private var homeworldValueLabel: UILabel?
     private var speciesValueLabel: UILabel?
     
-    // Valores armazenados
-    private var homeworldName: String = "Loading..."
-    private var speciesName: String = "Loading..."
+    private var homeworldName: String = "loading..."
+    private var speciesName: String = "loading..."
     
     init(character: Character) {
         self.character = character
@@ -24,7 +22,7 @@ class CharacterDetailsViewController: PreViewController {
     override func viewDidLoad() {
         setCustomFontInSubviews(view)
         navigationController?.setNavigationBarHidden(true, animated: false)
-        titleLabel.text = character.name
+        titleLabel.text = character.name.lowercased()
         titleLabel.font = AppFonts.home
         
         super.setupBackground()
@@ -38,15 +36,14 @@ class CharacterDetailsViewController: PreViewController {
         fetchSpeciesAndSetupInfo()
     }
     
-    //get dos dados associados a character
     private func fetchHomeworldAndSetupInfo() {
         APIService.fetchPlanet(from: character.homeworld) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let planet):
-                self.homeworldName = planet.name
+                self.homeworldName = planet.name.lowercased()
             case .failure:
-                self.homeworldName = "Unknown"
+                self.homeworldName = "unknown"
             }
             self.updateHomeworldLabel()
         }
@@ -54,7 +51,7 @@ class CharacterDetailsViewController: PreViewController {
 
     private func fetchSpeciesAndSetupInfo() {
         guard let speciesURL = character.species.first else {
-            speciesName = "Unknown"
+            speciesName = "unknown"
             updateSpeciesLabel()
             return
         }
@@ -62,15 +59,13 @@ class CharacterDetailsViewController: PreViewController {
             guard let self = self else { return }
             switch result {
             case .success(let species):
-                self.speciesName = species.name
+                self.speciesName = species.name.lowercased()
             case .failure:
-                self.speciesName = "Unknown"
+                self.speciesName = "unknown"
             }
             self.updateSpeciesLabel()
         }
     }
-    
-    //Disposição dos dados por secções
     
     private func setupCharacterInfo() {
         let stackView = UIStackView()
@@ -85,7 +80,7 @@ class CharacterDetailsViewController: PreViewController {
             sectionStack.spacing = 12
             
             let titleLabel = UILabel()
-            titleLabel.text = title
+            titleLabel.text = title.lowercased()
             titleLabel.textColor = UIColor(named: "PrimaryColor")
             titleLabel.font = AppFonts.home
             sectionStack.addArrangedSubview(titleLabel)
@@ -97,13 +92,13 @@ class CharacterDetailsViewController: PreViewController {
                 rowStack.spacing = 8
                 
                 let keyLabel = UILabel()
-                keyLabel.text = key.uppercased()
+                keyLabel.text = key.lowercased()
                 keyLabel.font = AppFonts.body
                 keyLabel.textColor = UIColor(named: "PrimaryColor")
                 keyLabel.textAlignment = .right
                 
                 let valueLabel = UILabel()
-                valueLabel.text = value
+                valueLabel.text = value.lowercased()
                 valueLabel.font = AppFonts.body
                 valueLabel.textColor = UIColor(named: "PrimaryColor")
                 valueLabel.textAlignment = .left
@@ -116,57 +111,50 @@ class CharacterDetailsViewController: PreViewController {
             return sectionStack
         }
         
-        // Biographical Information
         stackView.addArrangedSubview(section(
-            title: "Biographical Information".lowercased(),
-            items: [("Born".lowercased(), character.birthYear)]
+            title: "biographical information",
+            items: [("born", character.birthYear)]
         ))
         
-        // Physical Description (sem species ainda)
         let physicalSection = section(
-            title: "Physical Description",
+            title: "physical description",
             items: [
-                ("Gender", character.gender),
-                ("Pronouns", pronounsFromGender(character.gender)),
-                ("Height", "\(character.height) meters"),
-                ("Mass", "\(character.mass) kilograms")
+                ("gender", character.gender),
+                ("pronouns", pronounsFromGender(character.gender)),
+                ("height", "\(character.height) meters"),
+                ("mass", "\(character.mass) kilograms")
             ]
         )
-        
         stackView.addArrangedSubview(physicalSection)
         
-        // Adiciona linha species no physicalSection, vai atualizar depois
         let speciesRow = UIStackView()
         speciesRow.axis = .horizontal
         speciesRow.distribution = .fillEqually
         speciesRow.spacing = 8
         
         let speciesKeyLabel = UILabel()
-        speciesKeyLabel.text = "SPECIES"
+        speciesKeyLabel.text = "species".lowercased()
         speciesKeyLabel.font = AppFonts.body
         speciesKeyLabel.textColor = UIColor(named: "PrimaryColor")
         speciesKeyLabel.textAlignment = .right
         
         let speciesValue = UILabel()
-        speciesValue.text = speciesName // Loading...
+        speciesValue.text = speciesName
         speciesValue.font = AppFonts.body
         speciesValue.textColor = UIColor(named: "PrimaryColor")
         speciesValue.textAlignment = .left
         
         speciesRow.addArrangedSubview(speciesKeyLabel)
         speciesRow.addArrangedSubview(speciesValue)
-        
         physicalSection.addArrangedSubview(speciesRow)
         self.speciesValueLabel = speciesValue
         
-        
-        // Homeworld section
         let homeworldSection = UIStackView()
         homeworldSection.axis = .vertical
         homeworldSection.spacing = 12
         
         let homeworldTitle = UILabel()
-        homeworldTitle.text = "Homeworld"
+        homeworldTitle.text = "homeworld"
         homeworldTitle.textColor = UIColor(named: "PrimaryColor")
         homeworldTitle.font = AppFonts.home
         homeworldSection.addArrangedSubview(homeworldTitle)
@@ -177,13 +165,13 @@ class CharacterDetailsViewController: PreViewController {
         homeworldRow.spacing = 8
         
         let homeworldKeyLabel = UILabel()
-        homeworldKeyLabel.text = "HOMEWORLD"
+        homeworldKeyLabel.text = "homeworld"
         homeworldKeyLabel.font = AppFonts.body
         homeworldKeyLabel.textColor = UIColor(named: "PrimaryColor")
         homeworldKeyLabel.textAlignment = .right
         
         let homeworldValue = UILabel()
-        homeworldValue.text = homeworldName // Loading...
+        homeworldValue.text = homeworldName
         homeworldValue.font = AppFonts.body
         homeworldValue.textColor = UIColor(named: "PrimaryColor")
         homeworldValue.textAlignment = .left
@@ -196,7 +184,6 @@ class CharacterDetailsViewController: PreViewController {
         
         self.homeworldValueLabel = homeworldValue
         
-        // Constraints
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
@@ -204,7 +191,6 @@ class CharacterDetailsViewController: PreViewController {
         ])
     }
     
-    //update de dados apresentados
     private func updateHomeworldLabel() {
         DispatchQueue.main.async {
             self.homeworldValueLabel?.text = self.homeworldName
@@ -219,9 +205,9 @@ class CharacterDetailsViewController: PreViewController {
     
     private func pronounsFromGender(_ gender: String) -> String {
         switch gender.lowercased() {
-        case "male": return "He/Him"
-        case "female": return "She/Her"
-        default: return "They/Them"
+        case "male": return "he/him"
+        case "female": return "she/her"
+        default: return "they/them"
         }
     }
     
