@@ -6,23 +6,14 @@ class HomeViewController : PreViewController {
     override func viewDidLoad() {
         super.setupBackground()
         super.setupLogo()
-
-        setupText()
-        setupTextAndButtons()
-//        setupButtons()
         
-    //    charactersButtonTapped()
-      //  shipsButtonTapped()
-       //     planetsButtonTapped()
-
+        setupTextAndButtons()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
-
-    private func setupText() {}
-      
+//Configuração dos elementos da view inicial - Texto e  butões
     private func setupTextAndButtons() {
         let introLabel = UILabel()
         introLabel.text = """
@@ -33,7 +24,7 @@ class HomeViewController : PreViewController {
         characters, their
         ships and their
         planets
-        """
+        """.lowercased()
         introLabel.font = AppFonts.title
         introLabel.textColor = UIColor(named: "PrimaryColor")
         introLabel.textAlignment = .center
@@ -72,6 +63,8 @@ class HomeViewController : PreViewController {
         ])
     }
 
+//ButtonTapped - Indicaçao da view a abrir em cada um dos botões, quando clicados
+    
     @objc private func charactersButtonTapped() {
         let vc = CharactersViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -88,7 +81,7 @@ class HomeViewController : PreViewController {
     }
 
 
-
+//Cração genérica dos botões
     private func createRoundedButton(title: String) -> UIButton {
         let button = UIButton(type: .system)
         button.setTitle(title, for: .normal)

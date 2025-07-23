@@ -22,10 +22,8 @@ class FilterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "BackgroundColor")
+        view.backgroundColor = UIColor(named: "BSBackground")
         view.layer.cornerRadius = 16
-        setupLayout()
-        toggleSpeciesVisibility()
         
         let closeButton = UIButton(type: .system)
         closeButton.setTitle("X", for: .normal)
@@ -33,9 +31,10 @@ class FilterViewController: UIViewController {
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(closeButton)
-        
-        
-        
+
+        setupLayout()
+        toggleSpeciesVisibility()
+
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
@@ -62,6 +61,8 @@ class FilterViewController: UIViewController {
             self.currentGender = (self.currentGender == selected) ? nil : selected
             self.refreshButtons()
         }
+        
+        
         genderButtons = genderStack.arrangedSubviews.compactMap { $0 as? UIButton }
         stackView.addArrangedSubview(genderStack)
 
@@ -76,8 +77,6 @@ class FilterViewController: UIViewController {
         speciesRows = createSpeciesRows()
         speciesRows.forEach { stackView.addArrangedSubview($0) }
 
-
-        // Buttons
         let buttonsStack = UIStackView()
         buttonsStack.axis = .horizontal
         buttonsStack.distribution = .fillEqually
@@ -93,7 +92,7 @@ class FilterViewController: UIViewController {
     private func createSectionLabel(_ title: String) -> UILabel {
         let label = UILabel()
         label.text = title
-        label.font = UIFont(name: "StarJediSpecialEdition", size: 16)
+        label.font = AppFonts.body
         label.textColor = UIColor(named: "PrimaryColor")
         return label
     }
@@ -107,6 +106,9 @@ class FilterViewController: UIViewController {
         options.forEach { option in
             let button = UIButton(type: .system)
             button.setTitle(option, for: .normal)
+            
+            button.layer.cornerRadius = 25
+            button.heightAnchor.constraint(equalToConstant: 20).isActive = true
             styleFilterButton(button, isSelected: (selected == option))
             button.addAction(UIAction { _ in action(option) }, for: .touchUpInside)
             stack.addArrangedSubview(button)
@@ -125,6 +127,9 @@ class FilterViewController: UIViewController {
         for (index, specie) in availableSpecies.sorted().enumerated() {
             let button = UIButton(type: .system)
             button.setTitle(specie, for: .normal)
+            button.layer.cornerRadius = 25
+            button.heightAnchor.constraint(equalToConstant: 20).isActive = true
+
             styleFilterButton(button, isSelected: currentSpecies.contains(specie))
             button.addAction(UIAction { _ in
                 if self.currentSpecies.contains(specie) {
@@ -155,11 +160,15 @@ class FilterViewController: UIViewController {
     }
 
     private func styleFilterButton(_ button: UIButton, isSelected: Bool) {
-        let textColor = UIColor(named: isSelected ? "TextOnPrimaryColor" : "SecondaryColor") ?? .black
-        let backgroundColor = UIColor(named: isSelected ? "PrimaryColor" : "ThirdColor") ?? .clear
+        let textColor = UIColor(named: "SecundaryColor") ?? .black
+        let backgroundColor = isSelected
+            ? (UIColor(named: "ClickedButton") ?? .clear)
+            : (UIColor(named: "Button") ?? .clear)
+
         button.setTitleColor(textColor, for: .normal)
         button.backgroundColor = backgroundColor
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = 10
+        button.heightAnchor.constraint(equalToConstant: 20).isActive = true
         button.titleLabel?.font = AppFonts.filteredButtons
     }
 
@@ -180,9 +189,10 @@ class FilterViewController: UIViewController {
         button.backgroundColor = UIColor(named: colorName)
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 20
-        button.titleLabel?.font = UIFont(name: "StarJediSpecialEdition", size: 16)
+        button.titleLabel?.font = AppFonts.body
         return button
     }
+
 
     @objc private func resetTapped() {
         currentGender = nil
@@ -194,7 +204,7 @@ class FilterViewController: UIViewController {
         delegate?.didUpdateFilters(selectedGender: currentGender, selectedSpecies: currentSpecies)
         dismiss(animated: true)
     }
-    
+
     @objc private func toggleSpeciesVisibility() {
         isSpeciesExpanded.toggle()
         speciesRows.forEach { $0.isHidden = !isSpeciesExpanded }
@@ -206,5 +216,4 @@ class FilterViewController: UIViewController {
     @objc private func closeTapped() {
         dismiss(animated: true, completion: nil)
     }
-
 }

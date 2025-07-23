@@ -28,21 +28,9 @@ class ShipDetailsViewController: PreViewController {
         setupConstraints()
         setupShipInfo()
         
-        /*APIService.fetchPlanet(from: planet.url) { [weak self] result in
-            guard let self = self else { return }
-
-            switch result {
-            case .success(let planet):
-                self.planet = planet
-                DispatchQueue.main.async {
-                    self.setupPlanetInfo()
-                }
-            case .failure(let error):
-                print("failed to fetch planet: \(error.localizedDescription)")
-            }
-        }*/
     }
     
+    //Disposição dos dados da api na view
     private func setupShipInfo() {
             titleLabel.text = ship.name.lowercased()
             titleLabel.font = AppFonts.home

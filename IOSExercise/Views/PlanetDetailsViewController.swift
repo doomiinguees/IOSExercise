@@ -25,6 +25,7 @@ class PlanetDetailsViewController: PreViewController {
 
         setupConstraints()
         
+        //Get dos dados do planet
         APIService.fetchPlanet(from: planet.url) { [weak self] result in
             guard let self = self else { return }
 
@@ -40,6 +41,7 @@ class PlanetDetailsViewController: PreViewController {
         }
     }
 
+    //disposição dos dados da api na view
     private func setupPlanetInfo() {
         titleLabel.text = planet.name.lowercased()
         

@@ -38,6 +38,7 @@ class CharacterDetailsViewController: PreViewController {
         fetchSpeciesAndSetupInfo()
     }
     
+    //get dos dados associados a character
     private func fetchHomeworldAndSetupInfo() {
         APIService.fetchPlanet(from: character.homeworld) { [weak self] result in
             guard let self = self else { return }
@@ -68,6 +69,8 @@ class CharacterDetailsViewController: PreViewController {
             self.updateSpeciesLabel()
         }
     }
+    
+    //Disposição dos dados por secções
     
     private func setupCharacterInfo() {
         let stackView = UIStackView()
@@ -201,6 +204,7 @@ class CharacterDetailsViewController: PreViewController {
         ])
     }
     
+    //update de dados apresentados
     private func updateHomeworldLabel() {
         DispatchQueue.main.async {
             self.homeworldValueLabel?.text = self.homeworldName

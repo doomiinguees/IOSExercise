@@ -1,5 +1,6 @@
 import UIKit
 
+//Extendendo de PreViewController, é possível aceder a elementos já configurados
 class ShipsViewController: PreViewController, UITableViewDelegate, UITableViewDataSource {
 
     private let tableView = UITableView()
@@ -7,7 +8,8 @@ class ShipsViewController: PreViewController, UITableViewDelegate, UITableViewDa
     private var filteredStarships: [Starship] = []
     private var isSearching: Bool = false
 
-
+    
+//Configuração dos elementos da view inicial - Texto e  butões
     override func viewDidLoad() {
         navigationController?.setNavigationBarHidden(true, animated: false)
         titleLabel.text = "Starships"
@@ -38,6 +40,7 @@ class ShipsViewController: PreViewController, UITableViewDelegate, UITableViewDa
 
     // MARK: - Table View
 
+    //Configuração da lógica e apresentação da tabela com os characters
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
@@ -96,7 +99,7 @@ class ShipsViewController: PreViewController, UITableViewDelegate, UITableViewDa
     }
     
     // MARK: - Constraints
-
+    //configuração da disposição de dada elemento
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),

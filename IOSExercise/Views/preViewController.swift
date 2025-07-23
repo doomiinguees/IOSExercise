@@ -1,13 +1,19 @@
 import UIKit
 
-
+//Configuração prévia de elementos gráficos da app
 class PreViewController : UIViewController, UISearchBarDelegate {
     let globalFontName = "StarJediSpecialEdition"
     
     let searchBar = UISearchBar()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNeedsStatusBarAppearanceUpdate()
+        
         setupBackground()
         setupLogo()
         
@@ -16,7 +22,7 @@ class PreViewController : UIViewController, UISearchBarDelegate {
         setCustomFontInSubviews(view)
         setupConstraints()
     }
-
+//configuração de fonts
     func setCustomFontInSubviews(_ view: UIView) {
         for subview in view.subviews {
             if let label = subview as? UILabel {
@@ -47,7 +53,7 @@ class PreViewController : UIViewController, UISearchBarDelegate {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
-
+//configuração do background
     public func setupBackground() {
         let background = UIImageView(image: UIImage(named: "space"))
         background.contentMode = .scaleAspectFill
@@ -62,7 +68,7 @@ class PreViewController : UIViewController, UISearchBarDelegate {
             background.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-    
+//configuração do logótipo
     public func setupLogo() {
         let logo = UIImageView(image: UIImage(named: "starLogo"))
         logo.translatesAutoresizingMaskIntoConstraints = false
@@ -75,7 +81,7 @@ class PreViewController : UIViewController, UISearchBarDelegate {
             logo.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
-    
+    //configuração do butão de retorceder
     public func addCustomBackButton() {
         let backButton = UIButton(type: .system)
         backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
@@ -109,6 +115,7 @@ class PreViewController : UIViewController, UISearchBarDelegate {
         view.addSubview(titleLabel)
     }
     
+    //configuração da searchbar
     public func setupSearchBar() {
         searchBar.delegate = self
 
@@ -147,7 +154,7 @@ class PreViewController : UIViewController, UISearchBarDelegate {
             )
         }
     }
-    
+    //configuração da imagem de falta de dados
     public let emptyStateImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "empty_state"))
         imageView.contentMode = .scaleAspectFit

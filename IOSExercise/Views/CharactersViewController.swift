@@ -1,5 +1,8 @@
 import UIKit
 
+
+//Extendendo de PreViewController, é possível aceder a elementos já configurados
+
 class CharactersViewController: PreViewController, UITableViewDelegate, UITableViewDataSource, FilterViewControllerDelegate {
 
     private let tableView = UITableView()
@@ -9,10 +12,6 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
     private var isSearching: Bool = false
     var speciesNames: [String] = []
 
-    // selectedSpecies: Set<String>
-    // Este Set precisa de guardar os NOMES das espécies (ex: "Human", "Droid")
-    // e não as URLs (ex: "https://swapi.info/api/species/1/").
-    // A sua declaração está correta, é a forma como o preenche e usa que precisa de ser ajustada.
     private var selectedSpecies: Set<String> = [] // Já está bom assim.
     private var selectedGender: String?
     private var sortBy: String = "name"
@@ -26,6 +25,7 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
     private let filterButton = UIButton(type: .system)
     private let filterGearButton = UIButton(type: .system)
 
+    //Chamada dos métodos de Preview e do ficheiro de pedidos à API
     override func viewDidLoad() {
         navigationController?.setNavigationBarHidden(true, animated: false)
         titleLabel.text = "Characters"
@@ -63,6 +63,7 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
 
     }
     
+    //Get dao nome infividual de cada Specie dos characters
     func loadSpeciesNames(for characters: [Character], completion: @escaping ([Character]) -> Void) {
         var updatedCharacters = characters
         let group = DispatchGroup()
@@ -87,15 +88,16 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
         }
     }
 
+    //save do nome das species
     func didUpdateFilters(selectedGender: String?, selectedSpecies: Set<String>) {
         self.selectedGender = selectedGender
-        self.selectedSpecies = selectedSpecies // selectedSpecies agora armazenará os NOMES das espécies
+        self.selectedSpecies = selectedSpecies
         applyFilters()
     }
     
+    //Implementação da pesquisa segundo os filtros escolhidos
     private func applyFilters() {
         filteredCharacters = characters.filter { character in
-            // <-- ALTERAR ISTO! (usar character.speciesNames para o filtro)
             let matchesSpecies = selectedSpecies.isEmpty || character.speciesNames.contains(where: { selectedSpecies.contains($0) })
             let matchesGender = selectedGender == nil || selectedGender?.lowercased() == character.gender.lowercased()
             return matchesSpecies && matchesGender
@@ -120,11 +122,14 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
 
     private let filterStackView = UIStackView()
 
+    //Configuração dos filtros de pesquisa
     private func setupFilterControls() {
         filterGearButton.setImage(UIImage(systemName: "line.horizontal.3.decrease"), for: .normal)
         filterGearButton.tintColor = UIColor(named: "SecundaryColor")
         filterGearButton.addTarget(self, action: #selector(filtersButtonTapped), for: .touchUpInside)
 
+        filterStackView.addArrangedSubview(filterButton)
+        
         let buttons: [(UIButton, String, Selector)] = [
             (nameSortButton, "NAME", #selector(sortByNameTapped)),
             (yearSortButton, "YEAR", #selector(sortByYearTapped)),
@@ -138,7 +143,9 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
             styleFilterButton(button, isSelected: false)
             filterStackView.addArrangedSubview(button)
         }
-
+        
+        filterStackView.addArrangedSubview(filterButton)
+        
         styleFilterButton(filterGearButton, isSelected: false)
         filterStackView.addArrangedSubview(filterGearButton)
         filterButton.setImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .normal)
@@ -150,24 +157,25 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
         filterStackView.spacing = 8
         filterStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        buttons.forEach { filterStackView.addArrangedSubview($0.0) }
-        filterStackView.addArrangedSubview(filterButton)
 
         view.addSubview(filterStackView)
     }
 
+    //Configuração visual dos butões e respetivos cliques
     private func styleFilterButton(_ button: UIButton, isSelected: Bool) {
-        let textColor = UIColor(named: isSelected ? "TextOnPrimaryColor" : "SecondaryColor") ?? .black
-        let backgroundColor = UIColor(named: isSelected ? "PrimaryColor" : "ThirdColor") ?? .clear
-        
+        let textColor = UIColor(named: "SecundaryColor") ?? .black
+        let backgroundColor = UIColor(named: isSelected ? "ClickedButton" : "Button") ?? .clear
+
         button.setTitleColor(textColor, for: .normal)
         button.backgroundColor = backgroundColor
         button.layer.cornerRadius = 8
         button.titleLabel?.font = AppFonts.filteredButtons
     }
 
+
     // MARK: - Table View
 
+    //Configuração da lógica e apresentação da tabela com os characters
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
@@ -188,7 +196,7 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
         let character = filteredCharacters[indexPath.row]
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = character.name.lowercased()
-        cell.textLabel?.font = UIFont(name: "StarJediSpecialEdition", size: 18)
+        cell.textLabel?.font = AppFonts.button
         cell.textLabel?.textColor = UIColor(named: "PrimaryColor")
         cell.textLabel?.textAlignment = .center
         cell.textLabel?.lineBreakMode = .byWordWrapping
@@ -247,6 +255,7 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
 
     // MARK: - UISearchBarDelegate
 
+    //Implementação da searchBar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             isSearching = false
@@ -263,6 +272,7 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
 
     // MARK: - Button Actions
 
+    //Implementação lógica do clique de cada botão
     @objc private func sortByNameTapped() {
         sortBy = "name"
         styleFilterButton(nameSortButton, isSelected: true)
@@ -291,6 +301,7 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
         applyFilters()
     }
 
+    //configuração da abertura do "popup" dos filters
     @objc private func filterButtonTapped() {
         let alert = UIAlertController(title: "Filters", message: nil, preferredStyle: .actionSheet)
 
@@ -326,12 +337,15 @@ class CharactersViewController: PreViewController, UITableViewDelegate, UITableV
     
     @objc private func filtersButtonTapped() {
         let filterVC = FilterViewController()
+        
+        let nav = UINavigationController(rootViewController: filterVC)
+        nav.modalPresentationStyle = .pageSheet
+        
+        
         filterVC.delegate = self
         filterVC.currentGender = selectedGender
         filterVC.currentSpecies = selectedSpecies
-        // <-- ALTERAR ISTO! (usar character.speciesNames aqui)
         filterVC.availableSpecies = Array(Set(characters.flatMap { $0.speciesNames })) // Use speciesNames
-        filterVC.modalPresentationStyle = .pageSheet
-        present(filterVC, animated: true)
+        present(nav, animated: true)
     }
 }

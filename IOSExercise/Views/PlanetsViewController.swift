@@ -1,5 +1,6 @@
 import UIKit
 
+//Extendendo de PreViewController, é possível aceder a elementos já configurados
 class PlanetsViewController: PreViewController, UITableViewDelegate, UITableViewDataSource {
 
     private let tableView = UITableView()
@@ -7,7 +8,8 @@ class PlanetsViewController: PreViewController, UITableViewDelegate, UITableView
     private var filteredPlanets: [Planet] = []
     private var isSearching: Bool = false
 
-
+    
+//Configuração dos elementos da view inicial - Texto e  butões
     override func viewDidLoad() {
         navigationController?.setNavigationBarHidden(true, animated: false)
         titleLabel.text = "Planets"
@@ -38,6 +40,7 @@ class PlanetsViewController: PreViewController, UITableViewDelegate, UITableView
 
     // MARK: - Table View
 
+    //Configuração da lógica e apresentação da tabela com os characters
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
@@ -61,10 +64,12 @@ class PlanetsViewController: PreViewController, UITableViewDelegate, UITableView
         let planet = filteredPlanets[indexPath.row]
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = planet.name.lowercased()
-        cell.textLabel?.font = UIFont(name: "StarJediSpecialEdition", size: 18)
+        cell.textLabel?.font = AppFonts.subtitle
         cell.textLabel?.textColor = UIColor(named: "PrimaryColor")
         cell.textLabel?.textAlignment = .center
         cell.textLabel?.lineBreakMode = .byWordWrapping
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
 
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
@@ -116,7 +121,7 @@ class PlanetsViewController: PreViewController, UITableViewDelegate, UITableView
             emptyStateImageView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
-    
+    //Definição e configuração da searchBar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             isSearching = false

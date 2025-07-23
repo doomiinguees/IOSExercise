@@ -20,12 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIButton.appearance().titleLabel?.font = UIFont(name: fontName, size: 18)
         UITextField.appearance().font = UIFont(name: fontName, size: 18)
         UITextView.appearance().font = UIFont(name: fontName, size: 18)
+        UIApplication.shared.statusBarStyle = .lightContent
+    
         return true
     }
     
+
     func configureGlobalFont() {
     }
-
 
     // MARK: UISceneSession Lifecycle
 
