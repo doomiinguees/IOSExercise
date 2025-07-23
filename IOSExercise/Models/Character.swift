@@ -1,5 +1,3 @@
-import Foundation
-
 struct Character: Codable {
     let name: String
     let height: String
@@ -17,6 +15,8 @@ struct Character: Codable {
     let created: String
     let edited: String
     let url: String
+
+    var speciesNames: [String] = [] // ← MUITO IMPORTANTE: mutável!
 
     private enum CodingKeys: String, CodingKey {
         case name

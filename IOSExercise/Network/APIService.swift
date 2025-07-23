@@ -10,54 +10,76 @@ struct PlanetResponse: Decodable {
 
 struct StarshipResponse: Decodable {
     let results: [Starship]
+}
     
-struct Planet: Codable {
+struct PlanetResponce: Codable {
     let name: String
     // outros campos se quiser
 }
 
-struct Species: Codable {
+struct SpeciesResponse: Codable {
     let name: String
+    let url: String
     // outros campos se quiser
 }
-}
+
+
 
 class APIService {
-    static func fetchCharacters(completion: @escaping (Result<[Character], Error>) -> Void) {
-        guard let url = URL(string: "https://swapi.info/api/people") else {
-            completion(.failure(NSError(domain: "Invalid URL", code: 1001)))
+    static func fetchSpeciesName(from urlString: String, completion: @escaping (String?) -> Void) {
+        guard let url = URL(string: urlString) else {
+            completion(nil)
             return
         }
 
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                }
-                return
-            }
-
+        URLSession.shared.dataTask(with: url) { data, _, _ in
             guard let data = data else {
-                DispatchQueue.main.async {
-                    completion(.failure(NSError(domain: "No data", code: 1002)))
-                }
+                completion(nil)
                 return
             }
 
             do {
-                let decoded = try JSONDecoder().decode([Character].self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(decoded))
-                }
+                let species = try JSONDecoder().decode(Species.self, from: data)
+                completion(species.name)
             } catch {
-                DispatchQueue.main.async {
-                    print("Erro no decode: \(error)")
-                    completion(.failure(error))
-                }
+                print("Erro ao decodificar espécie: \(error)")
+                completion(nil)
             }
         }.resume()
     }
-    
+
+    static func fetchCharacters(completion: @escaping (Result<[Character], Error>) -> Void) {
+            guard let url = URL(string: "https://swapi.info/api/people") else {
+                completion(.failure(NSError(domain: "Invalid URL", code: 1001)))
+                return
+            }
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
+                    return
+                }
+                guard let data = data else {
+                    DispatchQueue.main.async {
+                        completion(.failure(NSError(domain: "No data", code: 1002)))
+                    }
+                    return
+                }
+                do {
+                    let decoded = try JSONDecoder().decode([Character].self, from: data)
+                    DispatchQueue.main.async {
+                        completion(.success(decoded))
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        print("Erro no decode: \(error)")
+                        completion(.failure(error))
+                    }
+                }
+            }.resume()
+        }
+        
     static func fetchStarships(completion: @escaping (Result<[Starship], Error>) -> Void) {
         guard let url = URL(string: "https://swapi.info/api/starships") else {
             completion(.failure(NSError(domain: "Invalid URL", code: 1001)))
@@ -203,23 +225,29 @@ class APIService {
             }.resume()
         }
         
-        static func fetchSpecies(from urlString: String, completion: @escaping (Result<Species, Error>) -> Void) {
+    static func fetchSpecies(from urlString: String, completion: @escaping (Result<Species, Error>) -> Void) {
             guard let url = URL(string: urlString) else {
-                completion(.failure(NSError(domain: "Invalid URL", code: -1)))
+                completion(.failure(NSError(domain: "Invalid URL", code: -1, userInfo: [NSLocalizedDescriptionKey: "URL da espécie é inválida."])))
                 return
             }
             URLSession.shared.dataTask(with: url) { data, _, error in
                 if let data = data {
                     do {
                         let species = try JSONDecoder().decode(Species.self, from: data)
-                        completion(.success(species))
+                        DispatchQueue.main.async { // Voltar à main thread para o completion handler
+                            completion(.success(species))
+                        }
                     } catch {
-                        completion(.failure(error))
+                        DispatchQueue.main.async {
+                            print("Erro no decode da espécie: \(error)")
+                            completion(.failure(error))
+                        }
                     }
                 } else if let error = error {
-                    completion(.failure(error))
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
                 }
             }.resume()
         }
-
 }

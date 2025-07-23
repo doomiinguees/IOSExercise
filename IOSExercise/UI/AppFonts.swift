@@ -8,5 +8,6 @@ struct AppFonts {
     static let subtitle = UIFont(name: "StarJediSpecialEdition", size: 18)
     static let body = UIFont(name: "StarJediSpecialEdition", size: 16)
     static let caption = UIFont(name: "StarJediSpecialEdition", size: 12)
+    static let filteredButtons = UIFont(name: "StarJediSpecialEdition", size: 12)
 
 }

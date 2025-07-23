@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C33A21262E306C9B00985E41 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33A21252E306C9B00985E41 /* FilterViewController.swift */; };
 		C365D02D2E2F0390007C7BB9 /* CharacterFull.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365D02C2E2F038F007C7BB9 /* CharacterFull.swift */; };
 		C365D0322E2F06FD007C7BB9 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365D0312E2F06FD007C7BB9 /* Species.swift */; };
 		C365D0372E2F1774007C7BB9 /* PlanetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C365D0362E2F1774007C7BB9 /* PlanetDetailsViewController.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C33A21252E306C9B00985E41 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		C365D02C2E2F038F007C7BB9 /* CharacterFull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFull.swift; sourceTree = "<group>"; };
 		C365D0312E2F06FD007C7BB9 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		C365D0362E2F1774007C7BB9 /* PlanetDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDetailsViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		C3D8E8752E266E8300890761 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C33A21252E306C9B00985E41 /* FilterViewController.swift */,
 				C3D8E8912E26722A00890761 /* HomeViewController.swift */,
 				C3A723B82E2919AE00821486 /* CharactersViewController.swift */,
 				C3A723BD2E2919C900821486 /* ShipsViewController.swift */,
@@ -354,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C33A21262E306C9B00985E41 /* FilterViewController.swift in Sources */,
 				C3A723BE2E2919C900821486 /* ShipsViewController.swift in Sources */,
 				C3A723C32E2919EF00821486 /* PlanetsViewController.swift in Sources */,
 				C37304222E285BAC00A881B7 /* Character.swift in Sources */,
